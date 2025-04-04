@@ -4,7 +4,7 @@
 
 import express from 'express';
 import { obtenerSuperheroePorIdController, obtenerTodosLosSuperheroesController, buscarSuperheroesPorAtributoController, obtenerSuperheroesMayoresDe30Controller, crearSuperheroeController, actualizarSuperheroeController, borrarSuperheroeIDController, borrarSuperheroeNombreController } from '../controllers/superheroesController.mjs';
-import { registerValidationRules } from '../validations/validationRules.mjs';
+import { deleteByIdValidationRules, deleteByNameValidationRules, registerValidationRules, updateValidationRules } from '../validations/validationRules.mjs';
 import { handleValidationErrors } from '../validations/errorMiddleware.mjs';
 
 const router = express.Router();
@@ -16,8 +16,9 @@ router.get('/heroes/buscar/:atributo/:valor', buscarSuperheroesPorAtributoContro
 
 router.post('/heroes/crear-heroe', registerValidationRules(), handleValidationErrors, crearSuperheroeController);
 
-router.put('/heroes/modificar-heroe', actualizarSuperheroeController);
-router.delete('/heroes/borrar-id/:id', borrarSuperheroeIDController);
-router.delete('/heroes/borrar-nombre/:nombre', borrarSuperheroeNombreController);
+router.put('/heroes/modificar-heroe', updateValidationRules(), handleValidationErrors, actualizarSuperheroeController);
+
+router.delete('/heroes/borrar-id/:id', deleteByIdValidationRules(), handleValidationErrors, borrarSuperheroeIDController);
+router.delete('/heroes/borrar-nombre/:nombre', deleteByNameValidationRules(), handleValidationErrors, borrarSuperheroeNombreController);
 
 export default router;
