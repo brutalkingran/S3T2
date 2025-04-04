@@ -4,7 +4,7 @@ import { formatearArray } from '../views/responseView.mjs';
 export const deleteByIdValidationRules = () => [
     param('id')
         .notEmpty().withMessage('El ID es obligatorio.')
-        .isInt({ min: 1 }).withMessage('El ID debe ser un número entero positivo.')
+        .isMongoId().withMessage('El ID debe ser un identificador válido de MongoDB.')
 ];
 
 export const deleteByNameValidationRules = () => [
@@ -93,13 +93,13 @@ export const registerValidationRules = () => [
     body('nombreSuperheroe')
         .trim() // nota: trim valida que sean strings
         .notEmpty().withMessage("Campo 'nombreSuperheroe' obligatorio.")
-        .isLength({ min : 3, max : 60}).withMessage('Ingrese un nombre de superhéroe válido con una longitud entre 3 y 60 caracteres.'),
+        .isLength({ min: 3, max: 60 }).withMessage('Ingrese un nombre de superhéroe válido con una longitud entre 3 y 60 caracteres.'),
 
     // nombreReal debe validarse que sea requerido, no tenga espacios en blanco(trim), una longitud minima de 3 caracteres y una longitud maxima de 60
     body('nombreReal')
         .notEmpty().withMessage("Campo 'nombreReal' obligatorio.")
         .trim()
-        .isLength({ min : 3, max : 60}).withMessage('Ingrese un nombre de superhéroe válido con una longitud entre 3 y 60 caracteres.'),
+        .isLength({ min: 3, max: 60 }).withMessage('Ingrese un nombre de superhéroe válido con una longitud entre 3 y 60 caracteres.'),
 
     //  edad debe validarse que sea requerido, que sea un numero, no tenga espacios en blanco(trim), valor minimo 0 (no admite edad negativa)
     body('edad') // nota: trim no es necesario en int
@@ -109,12 +109,12 @@ export const registerValidationRules = () => [
     body('debilidad')
         .optional({ checkFalsy: true })
         .trim()
-        .isLength({ min : 3, max : 60}).withMessage('Ingrese debilidad de superhéroe válido con una longitud entre 3 y 60 caracteres.'),
+        .isLength({ min: 3, max: 60 }).withMessage('Ingrese debilidad de superhéroe válido con una longitud entre 3 y 60 caracteres.'),
 
     body('creador')
         .notEmpty().withMessage("Campo 'creador' obligatorio.")
         .trim()
-        .isLength({ min : 3, max : 60}).withMessage('Ingrese creador de superhéroe válido con una longitud entre 3 y 60 caracteres.'),
+        .isLength({ min: 3, max: 60 }).withMessage('Ingrese creador de superhéroe válido con una longitud entre 3 y 60 caracteres.'),
 
     //  poderes debe validarse que sea requerido, que sea un array de string cuyo tamaño no sea 0, cada elemento no tenga espacios en blanco, cada elemento una longitud minima de 3 caracteres y una longitud maxima de 60
     body('poderes')
