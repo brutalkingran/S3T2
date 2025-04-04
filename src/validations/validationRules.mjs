@@ -1,4 +1,4 @@
-import { body } from 'express-validator';
+import { body, param } from 'express-validator';
 import { formatearArray } from '../views/responseView.mjs';
 
 export const deleteByIdValidationRules = () => [
